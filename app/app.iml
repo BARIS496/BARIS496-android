@@ -96,7 +96,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/external_lıbs_dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javac" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lınt_jar" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_jnı_lıbs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_manıfests" />
@@ -108,13 +107,11 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shader_assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/sıgnıng_confıg" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/valıdate_sıgnıng_confıg" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/ınstant_app_manıfest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/ınstant_run_merged_manıfests" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 28 Platform" jdkType="Android SDK" />
