@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Butona tıklandığında ne yapmasını gerektiğini belirttik
-                if(email != null){
+                if(!(email.getText().toString().isEmpty())){
                     Intent gecisYap = new Intent(LoginActivity.this, MainActivity.class);
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
                     startActivity(gecisYap);
