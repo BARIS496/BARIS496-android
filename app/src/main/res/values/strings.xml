@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">ZoologicalFooding</string>
+    <string name="app_name">Bil496</string>
+    <string name="mapbox_access_token">MAPBOX_ACCESS_TOKEN</string>
+    <string name="title_activity_enter_recipe">Container List</string>
+    <string name="title_activity_search">Member List</string>
+    <string name="title_activity_registration">Registration</string>
+    <string name="title_activity_login">Login</string>
 </resources>

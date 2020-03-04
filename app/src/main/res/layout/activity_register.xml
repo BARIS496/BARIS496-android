@@ -7,34 +7,13 @@
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/gradient"
-    tools:context=".RegisterActivity">
+    android:background="@drawable/foto1"
+    tools:context=".RegistrationActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register new account" />
-
-    <EditText
-        android:id="@+id/fName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="First Name"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/lName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Last Name"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Address"
-        android:inputType="text" />
 
     <EditText
         android:id="@+id/email"

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ZoologicalFooding-android.iml" filepath="$PROJECT_DIR$/ZoologicalFooding-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Bil496.iml" filepath="$PROJECT_DIR$/Bil496.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
