@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MapActivity"
+            android:name=".ContainerActivity"
             android:label="@string/title_activity_enter_recipe"
             />
         <activity

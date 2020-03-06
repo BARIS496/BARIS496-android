@@ -16,12 +16,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import android.widget.Toast;
+
 public class ContainerActivity extends AppCompatActivity{
 
     //Container listelemek icin kullanacagimiz metod
 
     private TextView mTextViewResult;
     private RequestQueue mQueue;
+    ArrayList<Double> list = new ArrayList<Double>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,19 +59,28 @@ public class ContainerActivity extends AppCompatActivity{
                         // Get current json object
                         JSONObject containers = response.getJSONObject(i);
 
-                        int id = containers.getInt("container_id");
-                        String name = containers.getString("name");
-                        String type = containers.getString("type");
-                        int lng = containers.getInt("lng");
-                        int lat = containers.getInt("lat");
-                        String address = containers.getString("address");
-                        double weight = containers.getDouble("weight");
+                        JSONObject food_container = response.getJSONObject(i);
+
+
+                        int id = food_container.getInt("containerID");
+                        String name = food_container.getString("name");
+                        String type = food_container.getString("type");
+                        String lng = food_container.getString("longitude");
+                        String lat = food_container.getString("latitude");
+                        String address = food_container.getString("address");
+                        double weight = food_container.getDouble("weight");
 
                         mTextViewResult.append(String.valueOf(id) + ", " + name + ", "
                                 + type + ", " + String.valueOf(lng) + ", " + String.valueOf(lat) + ", " + address + ", " +
-                                String.valueOf(weight) +
+                                String.valueOf(weight) + ", " +
                                 "\n\n");
+
+                        list.add((Double.valueOf(lng)));
+
+
                     }
+                    for(int i = 0; i<list.size(); i++)
+                        Toast.makeText(getApplicationContext(), list.get(i) + "" , Toast.LENGTH_LONG).show();
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -83,6 +96,7 @@ public class ContainerActivity extends AppCompatActivity{
         );
         // Add JsonArrayRequest to the RequestQueue
         mQueue.add(jsonArrayRequest);
+
 
     }
 
