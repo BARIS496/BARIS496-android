@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextViewResult = findViewById(R.id.text_view_result);
+        //mTextViewResult = findViewById(R.id.text_view_result);
 
 
         mQueue = Volley.newRequestQueue(this);
