@@ -1,5 +1,6 @@
 package com.example.bil496;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.SearchView;
@@ -15,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -101,6 +103,14 @@ public class ContainerActivity extends AppCompatActivity{
                                 options.position(new LatLng(listLat.get(i),listLng.get(i)));
                                 mapboxMap.addMarker(options);
                             }
+                            mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+                                @Override
+                                public boolean onMarkerClick(@NonNull Marker marker) {
+                                    Intent gecisYap = new Intent(ContainerActivity.this, ContainerDetailsActivity.class);
+                                    startActivity(gecisYap);
+                                    return true;
+                                }
+                            });
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
