@@ -2,6 +2,7 @@ package com.example.bil496;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class ContainerActivity extends AppCompatActivity{
     private SearchView search;
     private RequestQueue mQueue;
     private String url = "http://restservices496.herokuapp.com/containers";
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +84,7 @@ public class ContainerActivity extends AppCompatActivity{
                                 JSONObject food_container = response.getJSONObject(i);
 
 
-                                int id = food_container.getInt("containerID");
+                                id = food_container.getInt("containerID");
                                 String name = food_container.getString("name");
                                 String type = food_container.getString("type");
                                 String lng = food_container.getString("longitude");
@@ -107,6 +109,7 @@ public class ContainerActivity extends AppCompatActivity{
                                 @Override
                                 public boolean onMarkerClick(@NonNull Marker marker) {
                                     Intent gecisYap = new Intent(ContainerActivity.this, ContainerDetailsActivity.class);
+                                    gecisYap.putExtra("id",(int)id);
                                     startActivity(gecisYap);
                                     return true;
                                 }

@@ -17,6 +17,10 @@
             android:label="@string/title_activity_enter_recipe"
             />
         <activity
+            android:name=".ContainerDetailsActivity"
+            android:label="Container Details"
+            />
+        <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_search"
              />
