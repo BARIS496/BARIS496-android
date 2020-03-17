@@ -12,6 +12,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -20,23 +21,28 @@ import org.json.JSONObject;
 
 public class ContainerDetailsActivity extends AppCompatActivity {
 
-    private TextView mTextViewResult;
+    private TextView nameText, typeText, weightText;
     private RequestQueue mQueue;
+    private RequestQueue mQueue2;
     private Button donation;
 
     @Override
     protected void onCreate(Bundle bundle){
         super.onCreate(bundle);
         setContentView(R.layout.activity_container_details);
-        mTextViewResult = findViewById(R.id.textView3);
+        nameText = findViewById(R.id.nameText);
+        typeText = findViewById(R.id.typeText);
+        weightText = findViewById(R.id.weightText);
 
         mQueue = Volley.newRequestQueue(this);
+        mQueue2 = Volley.newRequestQueue(this);
 
         Bundle gelenVeri=getIntent().getExtras();
         final int deger = gelenVeri.getInt("anahtar");
 
 
         String url = "http://restservices496.herokuapp.com/containers";
+        String fillsUrl = "http://restservices496.herokuapp.com/fills";
 
         // Initialize a new JsonArrayRequest instance
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -61,13 +67,14 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                         String address = food_container.getString("address");
                         double weight = food_container.getDouble("weight");
 
+                        if(id == deger){
+                            nameText.append(name + "\n\n");
+                            typeText.append(type + "\n\n");
+                            weightText.append(String.valueOf(weight) + "\n\n");
 
-                        if(id == deger)
-                            mTextViewResult.append(String.valueOf(id) + ", " + name + ", "
-                                    + type + ", " + lng + ", " + lat + ", " + address + weight +
-                                    "\n\n");
-
+                        }
                     }
+
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -81,6 +88,7 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                     }
                 }
         );
+
         // Add JsonArrayRequest to the RequestQueue
         mQueue.add(jsonArrayRequest);
 
