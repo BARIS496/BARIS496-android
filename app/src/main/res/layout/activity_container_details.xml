@@ -1,51 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/foto2">
 
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Name:"/>
     <TextView
         android:id="@+id/nameText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        />
-    <TextView
-        android:id="@+id/type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Type:"
-        android:layout_below="@+id/name"/>
+        android:layout_height="50dp"
+        android:textColor="@color/colorAccent" />
+
     <TextView
         android:id="@+id/typeText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        />
-    <TextView
-        android:id="@+id/weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Weight:"
-        android:layout_below="@+id/type"
-        />
+        android:layout_height="50dp"
+        android:layout_below="@+id/nameText"
+        android:textColor="@color/colorAccent" />
+
     <TextView
         android:id="@+id/weightText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/type"
-        android:layout_alignParentRight="true"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/typeText"
+        android:textColor="@color/colorAccent" />
     <Button
-        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/weight"
-        android:layout_centerHorizontal="true"
-        android:text="DONATION" />
+        android:id="@+id/button"
+        android:text="DONATION"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorAccent" />
+
+
+
 </RelativeLayout>

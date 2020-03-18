@@ -2,6 +2,7 @@ package com.example.bil496;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -23,8 +24,7 @@ public class ContainerDetailsActivity extends AppCompatActivity {
 
     private TextView nameText, typeText, weightText;
     private RequestQueue mQueue;
-    private RequestQueue mQueue2;
-    private Button donation;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle bundle){
@@ -33,9 +33,18 @@ public class ContainerDetailsActivity extends AppCompatActivity {
         nameText = findViewById(R.id.nameText);
         typeText = findViewById(R.id.typeText);
         weightText = findViewById(R.id.weightText);
+        button = findViewById(R.id.button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Butona tıklandığında ne yapmasını gerektiğini belirttik
+                Intent gecisYap = new Intent(ContainerDetailsActivity.this, DonationActivity.class);
+                startActivity(gecisYap);
+            }
+        });
 
         mQueue = Volley.newRequestQueue(this);
-        mQueue2 = Volley.newRequestQueue(this);
 
         Bundle gelenVeri=getIntent().getExtras();
         final int deger = gelenVeri.getInt("anahtar");
@@ -49,10 +58,7 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                 null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                // Do something with response
-                //mTextView.setText(response.toString());
 
-                // Process the JSON
                 try{
                     // Loop through the array elements
                     for(int i=0;i<response.length();i++){
@@ -68,9 +74,9 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                         double weight = food_container.getDouble("weight");
 
                         if(id == deger){
-                            nameText.append(name + "\n\n");
-                            typeText.append(type + "\n\n");
-                            weightText.append(String.valueOf(weight) + "\n\n");
+                            nameText.append("Name: " + name + "\n\n");
+                            typeText.append("Type: " + type + "\n\n");
+                            weightText.append("Weight: " + String.valueOf(weight) + "\n\n");
 
                         }
                     }
@@ -92,6 +98,10 @@ public class ContainerDetailsActivity extends AppCompatActivity {
         // Add JsonArrayRequest to the RequestQueue
         mQueue.add(jsonArrayRequest);
 
+    }
+    public void button(View view) {
+        Intent intent = new Intent( this, DonationActivity.class);
+        startActivity(intent);
     }
 
 }
