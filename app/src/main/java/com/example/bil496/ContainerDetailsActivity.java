@@ -25,6 +25,7 @@ public class ContainerDetailsActivity extends AppCompatActivity {
     private TextView nameText, typeText, weightText;
     private RequestQueue mQueue;
     private Button button;
+    private int id;
 
     @Override
     protected void onCreate(Bundle bundle){
@@ -35,19 +36,10 @@ public class ContainerDetailsActivity extends AppCompatActivity {
         weightText = findViewById(R.id.weightText);
         button = findViewById(R.id.button);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Butona tıklandığında ne yapmasını gerektiğini belirttik
-                Intent gecisYap = new Intent(ContainerDetailsActivity.this, DonationActivity.class);
-                startActivity(gecisYap);
-            }
-        });
-
         mQueue = Volley.newRequestQueue(this);
 
         Bundle gelenVeri=getIntent().getExtras();
-        final int deger = gelenVeri.getInt("anahtar");
+        final int deger = gelenVeri.getInt("id");
 
 
         String url = "http://restservices496.herokuapp.com/containers";
@@ -65,7 +57,7 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                         // Get current json object
                         JSONObject food_container = response.getJSONObject(i);
 
-                        int id = food_container.getInt("containerID");
+                        id = food_container.getInt("containerID");
                         String name = food_container.getString("name");
                         String type = food_container.getString("type");
                         String lng = food_container.getString("longitude");
@@ -80,7 +72,15 @@ public class ContainerDetailsActivity extends AppCompatActivity {
 
                         }
                     }
-
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // Butona tıklandığında ne yapmasını gerektiğini belirttik
+                            Intent gecisYap = new Intent(ContainerDetailsActivity.this, DonationActivity.class);
+                            gecisYap.putExtra("container_id",(int)id);
+                            startActivity(gecisYap);
+                        }
+                    });
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -98,10 +98,6 @@ public class ContainerDetailsActivity extends AppCompatActivity {
         // Add JsonArrayRequest to the RequestQueue
         mQueue.add(jsonArrayRequest);
 
-    }
-    public void button(View view) {
-        Intent intent = new Intent( this, DonationActivity.class);
-        startActivity(intent);
     }
 
 }

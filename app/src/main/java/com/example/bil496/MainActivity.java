@@ -26,10 +26,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_maps);
 
-        //mTextViewResult = findViewById(R.id.text_view_result);
-
+        mTextViewResult = findViewById(R.id.textView);
 
         mQueue = Volley.newRequestQueue(this);
 
@@ -53,17 +52,18 @@ public class MainActivity extends AppCompatActivity {
                     // Loop through the array elements
                     for(int i=0;i<response.length();i++){
                         // Get current json object
-                        JSONObject member = response.getJSONObject(i);
+                        JSONObject member_generator = response.getJSONObject(i);
 
-                        int id = member.getInt("member_id");
-                        String firstName = member.getString("first_name");
-                        String lastName = member.getString("last_name");
-                        String address = member.getString("address");
-                        String email = member.getString("email");
-                        String pass = member.getString("pass");
+                        int id = member_generator.getInt("memberID");
+                        String firstName = member_generator.getString("first_name");
+                        String lastName = member_generator.getString("last_name");
+                        String address = member_generator.getString("address");
+                        String email = member_generator.getString("email");
+                        String username = member_generator.getString("username");
+                        String pass = member_generator.getString("pass");
 
                         mTextViewResult.append(String.valueOf(id) + ", " + firstName + ", "
-                                + lastName + ", " + address + ", " + email + ", " + pass +
+                                + lastName + ", " + email + ", " + username +
                                 "\n\n");
                     }
                 }catch (JSONException e){

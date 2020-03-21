@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name="DonationActivity"
+            android:label="Donation Page"/>
+        <activity
             android:name=".ContainerActivity"
             android:label="@string/title_activity_enter_recipe"
             />

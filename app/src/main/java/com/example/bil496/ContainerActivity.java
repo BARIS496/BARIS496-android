@@ -38,6 +38,7 @@ public class ContainerActivity extends AppCompatActivity{
 
     ArrayList<Double> listLat = new ArrayList<>();
     ArrayList<Double> listLng = new ArrayList<>();
+    ArrayList<Integer> listId = new ArrayList<>();
 
     private MapView mapView;
     private Button go;
@@ -94,6 +95,7 @@ public class ContainerActivity extends AppCompatActivity{
 
                                 listLat.add((Double.valueOf(lat)));
                                 listLng.add(Double.valueOf(lng));
+                                listId.add(id);
 
 
                             }
