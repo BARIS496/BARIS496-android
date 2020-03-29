@@ -22,7 +22,7 @@ import org.json.JSONObject;
 
 public class ContainerDetailsActivity extends AppCompatActivity {
 
-    private TextView nameText, typeText, weightText;
+    private TextView nameText, addText, weightText, doluText, typeText;
     private RequestQueue mQueue;
     private Button button;
     private int id;
@@ -31,19 +31,20 @@ public class ContainerDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle bundle){
         super.onCreate(bundle);
         setContentView(R.layout.activity_container_details);
-        nameText = findViewById(R.id.nameText);
-        typeText = findViewById(R.id.typeText);
-        weightText = findViewById(R.id.weightText);
+        nameText = findViewById(R.id.baslik);
+        addText = findViewById(R.id.address);
+        weightText = findViewById(R.id.agirlik);
+        doluText = findViewById(R.id.dolu);
+        typeText = findViewById(R.id.foodType);
         button = findViewById(R.id.button);
 
         mQueue = Volley.newRequestQueue(this);
 
-        Bundle gelenVeri=getIntent().getExtras();
-        final int deger = gelenVeri.getInt("id");
+        Bundle gelenVeri = getIntent().getExtras();
+        final String deger = gelenVeri.getString("id");
 
 
         String url = "http://restservices496.herokuapp.com/containers";
-        String fillsUrl = "http://restservices496.herokuapp.com/fills";
 
         // Initialize a new JsonArrayRequest instance
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -55,20 +56,25 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                     // Loop through the array elements
                     for(int i=0;i<response.length();i++){
                         // Get current json object
-                        JSONObject food_container = response.getJSONObject(i);
+                        JSONObject foodcontainer_generator = response.getJSONObject(i);
 
-                        id = food_container.getInt("containerID");
-                        String name = food_container.getString("name");
-                        String type = food_container.getString("type");
-                        String lng = food_container.getString("longitude");
-                        String lat = food_container.getString("latitude");
-                        String address = food_container.getString("address");
-                        double weight = food_container.getDouble("weight");
+                        id = foodcontainer_generator.getInt("containerID");
+                        String name = foodcontainer_generator.getString("name");
+                        String type = foodcontainer_generator.getString("type");
+                        String lng = foodcontainer_generator.getString("longitude");
+                        String lat = foodcontainer_generator.getString("latitude");
+                        String address = foodcontainer_generator.getString("address");
+                        double weight = foodcontainer_generator.getDouble("weight");
 
-                        if(id == deger){
-                            nameText.append("Name: " + name + "\n\n");
-                            typeText.append("Type: " + type + "\n\n");
-                            weightText.append("Weight: " + String.valueOf(weight) + "\n\n");
+                        if(id == Integer.parseInt(deger)){
+                            nameText.append(" Container Name: " + name + "\n\n");
+                            typeText.append(" Type: " + type + "\n\n");
+                            addText.append((" Address:" + address + "\n\n"));
+                            weightText.append(" Weight: " + String.valueOf(weight) + "\n\n");
+
+                            //max agirlik 300 gram
+                            double yuzde = (weight * 100) / 300;
+                            doluText.append(" Full Amount: % " + Math.floor(yuzde * 100) / 100);
 
                         }
                     }

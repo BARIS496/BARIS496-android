@@ -5,4 +5,5 @@
     <string name="title_activity_search">Member List</string>
     <string name="title_activity_registration">Registration</string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_donation">Donation Page</string>
 </resources>

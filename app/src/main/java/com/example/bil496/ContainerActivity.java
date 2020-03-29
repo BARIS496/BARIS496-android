@@ -41,11 +41,8 @@ public class ContainerActivity extends AppCompatActivity{
     ArrayList<Integer> listId = new ArrayList<>();
 
     private MapView mapView;
-    private Button go;
-    private SearchView search;
     private RequestQueue mQueue;
     private String url = "http://restservices496.herokuapp.com/containers";
-    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +82,7 @@ public class ContainerActivity extends AppCompatActivity{
                                 JSONObject food_container = response.getJSONObject(i);
 
 
-                                id = food_container.getInt("containerID");
+                                int id = food_container.getInt("containerID");
                                 String name = food_container.getString("name");
                                 String type = food_container.getString("type");
                                 String lng = food_container.getString("longitude");
@@ -93,25 +90,24 @@ public class ContainerActivity extends AppCompatActivity{
                                 String address = food_container.getString("address");
                                 double weight = food_container.getDouble("weight");
 
+
                                 listLat.add((Double.valueOf(lat)));
                                 listLng.add(Double.valueOf(lng));
                                 listId.add(id);
-
-
                             }
-
                             //added mark
                             for(int i = 0; i < listLat.size(); i++){
                                 MarkerOptions options = new MarkerOptions();
-                                options.setTitle(listLat.get(i) + "," + listLng.get(i));
+                                options.setTitle(String.valueOf(listId.get(i)));
                                 options.position(new LatLng(listLat.get(i),listLng.get(i)));
                                 mapboxMap.addMarker(options);
                             }
+
                             mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
                                 @Override
                                 public boolean onMarkerClick(@NonNull Marker marker) {
                                     Intent gecisYap = new Intent(ContainerActivity.this, ContainerDetailsActivity.class);
-                                    gecisYap.putExtra("id",(int)id);
+                                    gecisYap.putExtra("id",marker.getTitle());
                                     startActivity(gecisYap);
                                     return true;
                                 }

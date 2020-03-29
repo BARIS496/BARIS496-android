@@ -13,10 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="DonationActivity"
-            android:label="Donation Page"/>
-        <activity
-            android:name=".ContainerActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_enter_recipe"
             />
         <activity
@@ -28,12 +25,16 @@
             android:label="@string/title_activity_search"
              />
         <activity
+            android:name=".DonationActivity"
+            android:label="Donation Page"
+            />
+        <activity
             android:name=".RegistrationActivity"
             android:label="@string/title_activity_registration"
             />
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"
+            android:name=".ContainerActivity"
+            android:label="Container List"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
