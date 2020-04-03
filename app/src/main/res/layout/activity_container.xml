@@ -18,4 +18,9 @@
 
     </com.mapbox.mapboxsdk.maps.MapView>
 
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/toolbar"
+        ></include>
+
 </RelativeLayout>
