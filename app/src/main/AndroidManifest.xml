@@ -15,23 +15,33 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_enter_recipe"
+            android:icon="@drawable/logo"
             />
         <activity
             android:name=".ContainerDetailsActivity"
             android:label="Container Details"
+            android:theme="@style/EditorTheme"
+            android:icon="@drawable/logo"
             />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_search"
+            android:icon="@drawable/logo"
              />
         <activity
             android:name=".DonationActivity"
             android:label="Donation Page"
+            android:icon="@drawable/logo"
             />
         <activity
             android:name=".RegistrationActivity"
             android:label="@string/title_activity_registration"
+            android:icon="@drawable/logo"
             />
+        <activity
+            android:name=".CartActivity"
+            android:label="Donation Page"
+            android:icon="@drawable/logo"/>
         <activity
             android:name=".ContainerActivity"
             android:label="Container List"

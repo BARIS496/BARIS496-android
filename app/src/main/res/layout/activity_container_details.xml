@@ -1,91 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <TextView
-        android:id="@+id/baslik"
-        style="@android:style/Widget.DeviceDefault.Light.TextView"
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textColor="@android:color/black"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/bos3"
+        android:layout_height="150dp"
+        android:id="@+id/imageLayout"
+        android:layout_marginTop="20dp">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/kugulu" />
+    </RelativeLayout>
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@+id/baslik"
-        android:textColor="@android:color/black" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="180dp"
-        android:layout_height="170dp"
-        android:layout_below="@+id/bos3"
-        android:layout_alignParentLeft="true"
-        android:textColor="@android:color/black"
-        app:srcCompat="@drawable/kugulu" />
-
-    <TextView
-        android:id="@+id/bos"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@+id/bos3"
-        android:layout_toRightOf="@+id/imageView"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/foodType"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/bos"
-        android:layout_toRightOf="@+id/imageView"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/agirlik"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/foodType"
-        android:layout_toRightOf="@+id/imageView"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/dolu"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/agirlik"
-        android:layout_toRightOf="@+id/imageView"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/bos2"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@+id/imageView"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/address"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bos2"
-        android:textColor="@android:color/black" />
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/imageLayout">
+        <TextView
+            android:text="Overview"
+            android:id="@+id/overview"
+            android:layout_marginLeft="3dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/name"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textPersonName|textCapWords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/overview"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/address"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textPersonName|textCapWords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/agirlik"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textPersonName|textCapWords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/address"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/dolu"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textPersonName|textCapWords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/agirlik"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/foodType"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textPersonName|textCapWords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dolu"
+            android:layout_marginTop="10dp"/>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="180dp"
-        android:background="@color/colorAccent"
-        android:text="Donation"
-        android:textColor="@color/colorWhite"
-        android:textSize="8dp" />
-
+        <Button
+            android:id="@+id/button"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/foodType"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorAccent"
+            android:text="Cart"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
+            app:srcCompat="@drawable/logo" />
+    </RelativeLayout>
 </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
+

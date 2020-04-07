@@ -26,12 +26,13 @@ public class ContainerDetailsActivity extends AppCompatActivity {
     private RequestQueue mQueue;
     private Button button;
     private int id;
+    private int cont;
 
     @Override
-    protected void onCreate(Bundle bundle){
+    public void onCreate(Bundle bundle){
         super.onCreate(bundle);
         setContentView(R.layout.activity_container_details);
-        nameText = findViewById(R.id.baslik);
+        nameText = findViewById(R.id.name);
         addText = findViewById(R.id.address);
         weightText = findViewById(R.id.agirlik);
         doluText = findViewById(R.id.dolu);
@@ -42,7 +43,6 @@ public class ContainerDetailsActivity extends AppCompatActivity {
 
         Bundle gelenVeri = getIntent().getExtras();
         final String deger = gelenVeri.getString("id");
-
 
         String url = "http://restservices496.herokuapp.com/containers";
 
@@ -67,6 +67,7 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                         double weight = foodcontainer_generator.getDouble("weight");
 
                         if(id == Integer.parseInt(deger)){
+                            cont = id;
                             nameText.append(" Container Name: " + name + "\n\n");
                             typeText.append(" Type: " + type + "\n\n");
                             addText.append((" Address:" + address + "\n\n"));
@@ -83,7 +84,7 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             // Butona tıklandığında ne yapmasını gerektiğini belirttik
                             Intent gecisYap = new Intent(ContainerDetailsActivity.this, DonationActivity.class);
-                            gecisYap.putExtra("container_id",(int)id);
+                            gecisYap.putExtra("container_id", String.valueOf(id) );
                             startActivity(gecisYap);
                         }
                     });
@@ -105,5 +106,12 @@ public class ContainerDetailsActivity extends AppCompatActivity {
         mQueue.add(jsonArrayRequest);
 
     }
+    public int getCont(){
+        return cont;
+    }
+    public void setCont(int id) {
+        this.cont = id;
+    }
+
 
 }

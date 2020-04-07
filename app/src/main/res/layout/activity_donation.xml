@@ -51,7 +51,6 @@
                 android:layout_below="@+id/fiyat"
                 android:layout_centerHorizontal="true"
                 android:text="Add To Cart"
-                android:textColor="@color/colorWhite"
                 android:textSize="8dp"
                 android:background="@color/colorAccent"/>
         </RelativeLayout>

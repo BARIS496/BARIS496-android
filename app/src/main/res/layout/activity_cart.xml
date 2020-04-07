@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CartActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_toRightOf="@+id/overview"
+                android:src="@drawable/logo"/>
+            <TextView
+                android:text="Credit and Debit Cards"
+                android:id="@+id/overview"
+                android:layout_marginLeft="3dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-light"
+                android:textColor="@color/colorAccent"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/foodName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/overview"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-light"
+                android:hint="Food Name"
+                android:inputType="textPersonName|textCapWords"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/foodType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/foodName"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-light"
+                android:hint="Food Type"
+                android:inputType="textPersonName|textCapWords"
+                android:textSize="12sp" />
+            <EditText
+                android:id="@+id/amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/foodType"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-light"
+                android:hint="Food Type"
+                android:inputType="textPersonName|textCapWords"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/fullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/amount"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-light"
+                android:hint="Full Name"
+                android:inputType="textPersonName|textCapWords"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/cardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fullName"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-light"
+                android:hint="Card Number"
+                android:inputType="textPersonName|textCapWords"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/ccvNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardNumber"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-light"
+                android:hint="CCV"
+                android:inputType="textPersonName|textCapWords"
+                android:textSize="12sp" />
+            <EditText
+                android:id="@+id/expDate"
+                android:fontFamily="sans-serif-light"
+                android:inputType="textPersonName|textCapWords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ccvNumber"
+                android:layout_marginTop="10dp"
+                android:hint="Expiration Date"
+                android:textSize="12sp" />
+            <Button
+                android:id="@+id/button"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/expDate"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorAccent"
+                android:text="Donate"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-light"
+                app:srcCompat="@drawable/logo" />
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
