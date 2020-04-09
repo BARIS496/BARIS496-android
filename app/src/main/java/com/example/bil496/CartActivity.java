@@ -1,8 +1,6 @@
 package com.example.bil496;
-import android.app.ProgressDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,9 +17,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
+import com.android.volley.toolbox.HttpHeaderParser;
 import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import java.text.SimpleDateFormat;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,56 +46,94 @@ public class CartActivity extends AppCompatActivity {
         amount = (EditText)findViewById(R.id.amount);
 
         mQueue = Volley.newRequestQueue(this);
-
-        Bundle gelenVeri = getIntent().getExtras();
-        final String deger = gelenVeri.getString("container_id");
-
-        mQueue = Volley.newRequestQueue(this);
-        jsonPost(foodName.toString(),foodType.toString(),fullName.toString(),cardNumber.toString(),
-                exDate.toString(),ccv.toString(),amount.toString(),deger);
-
-    }
-
-    private void jsonPost(final String foodName, final String foodType, final String fullName,
-                          final String cardNumber, final String exDate, final String ccv, String amount, final String deger){
-        url = "http://restservices496.herokuapp.com/addDonate";
-
-        final StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String string) {
-                // response
-                Log.d("Response", string);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(getApplicationContext(), "Veriler Okunurken Hata Oluştu" + deger, Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> donateTable_generator = new HashMap<>();
-                donateTable_generator.put("containerId", deger);
-                donateTable_generator.put("donateType", "kopek");
-                donateTable_generator.put("creditCardNumber", String.valueOf(cardNumber));
-                donateTable_generator.put("fullName", String.valueOf(fullName));
-                donateTable_generator.put("expiration_date",String.valueOf(exDate));
-                donateTable_generator.put("cvvNumber", String.valueOf(ccv));
-                return donateTable_generator;
-            }
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
-            }
-        };
         executeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                // Butona tıklandığında ne yapmasını gerektiğini belirttik
-                mQueue.add(request);
+            public void onClick(View view) {
+                StringRequest jsonForPostRequest = new StringRequest(
+                        Request.Method.POST,url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                Log.i("log",response.toString());
+
+                                JSONObject jsonObject = null;
+                                try {
+                                    jsonObject = new JSONObject(response);
+                                    Toast.makeText(getApplicationContext(),""+jsonObject.getString(String.valueOf(Integer.parseInt("mesaj"))),Toast.LENGTH_LONG).show();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        finish();
+                        NetworkResponse response = error.networkResponse;
+                        if(response != null && response.data != null){
+                            JSONArray jsonObject = null;
+                            String errorMessage = null;
+
+                            switch(response.statusCode){
+                                case 400:
+                                    errorMessage = new String(response.data);
+
+                                    try {
+                                        jsonObject = new JSONObject().getJSONArray(errorMessage);
+                                        String serverResponseMessage =  (String)jsonObject.get(Integer.parseInt("hataMesaj"));
+                                        Toast.makeText(getApplicationContext(),""+serverResponseMessage,Toast.LENGTH_LONG).show();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                            }
+                        }
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");;
+                        String responseDate = sdf.format(12961212);
+
+                        Map<String,String> params = new HashMap<String, String>();
+
+                        /*{"donatesID":1022,"foodType":null,"amountStr":"20","likedStr":null,
+                        "containerId":2564,"donateType":"CREDITCARD","promotionCode":"null",
+                        "creditCardNumberStr":"123","fullName":"tolga","expiration_dateStr":"123",
+                        "cvvNumberStr":"123","recieverName":"null","donateFoodName":" ProPlan Salmon",
+                        "donaterMail":"tolgacarr@gmail.com","discountCode":"0","donateTime":"2020-04-09 16:12:16"
+                         */
+
+                        params.put("foodType","aaa");
+                        params.put("amountStr","100");
+                        params.put("likedStr","2");
+                        params.put("containerId", "0");
+                        params.put("donateType","cat");
+                        params.put("promotionCode","0");
+                        params.put("creditCardNumberStr","123");
+                        params.put("fullName","SUKO");
+                        params.put("expiration_dateStr","123");
+                        params.put("cvvNumberStr","123");
+                        params.put("recieverName","ali");
+                        params.put("donateFoodName"," ttt");
+                        params.put("donaterMail","gsukransaygili@gmail.com");
+                        params.put("discountCode","0");
+                        params.put("donateTime","2020-04-08 20:53:35");
+
+                        return params;
+                    }
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> param = new HashMap<String, String>();
+                        param.put("Content-Type", "application/json; charset=utf-8");
+                        return param;
+                    }
+                };
+                jsonForPostRequest.setRetryPolicy(new DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                mQueue.add(jsonForPostRequest);
             }
         });
     }
+
 }
