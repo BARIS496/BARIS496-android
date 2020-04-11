@@ -25,6 +25,7 @@ public class ContainerDetailsActivity extends AppCompatActivity {
     private TextView nameText, addText, weightText, doluText, typeText;
     private RequestQueue mQueue;
     private Button button;
+    private Button button2;
     private int id;
     private int cont;
 
@@ -38,6 +39,7 @@ public class ContainerDetailsActivity extends AppCompatActivity {
         doluText = findViewById(R.id.dolu);
         typeText = findViewById(R.id.foodType);
         button = findViewById(R.id.button);
+        button2 = findViewById(R.id.historyButton);
 
         mQueue = Volley.newRequestQueue(this);
 
@@ -51,7 +53,6 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                 null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-
                 try{
                     // Loop through the array elements
                     for(int i=0;i<response.length();i++){
@@ -88,6 +89,16 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                             startActivity(gecisYap);
                         }
                     });
+                    button2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // Butona tıklandığında ne yapmasını gerektiğini belirttik
+                            Intent gecisYap = new Intent(ContainerDetailsActivity.this, HistoryActivity.class);
+                            gecisYap.putExtra("container_id", String.valueOf(id) );
+                            startActivity(gecisYap);
+                        }
+                    });
+
                 }catch (JSONException e){
                     e.printStackTrace();
                 }

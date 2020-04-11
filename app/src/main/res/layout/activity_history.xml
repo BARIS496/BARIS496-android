@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:shrinkColumns="*"  android:stretchColumns="*" android:background="#ffffff">
+    <!-- Dort sutun bir satır  -->
+    <TableRow
+        android:id="@+id/satir1"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="50dp">
+        <TextView
+            android:id="@+id/sat1sut1"
+            android:layout_weight="1" android:background="#d3d3d3"
+            android:textColor="#000000"
+            android:padding="200dip" android:gravity="center"/>
+        <TextView
+            android:id="@+id/sat1sut2"
+            android:layout_weight="1" android:background="#d3d3d3"
+            android:textColor="#000000"
+            android:padding="200dip" android:gravity="center"/>
+        <TextView
+            android:id="@+id/sat1sut3"
+            android:layout_weight="1" android:background="#d3d3d3"
+            android:textColor="#000000"
+            android:padding="200dip" android:gravity="center"/>
+        <TextView
+            android:id="@+id/sat1sut4"
+            android:layout_weight="1" android:background="#d3d3d3"
+            android:textColor="#000000"
+            android:padding="200dip" android:gravity="center"/>
+    </TableRow>
+</TableLayout>

@@ -76,11 +76,7 @@ public class ContainerActivity extends AppCompatActivity{
                         try{
                             // Loop through the array elements
                             for(int i=0;i<response.length();i++){
-                                // Get current json object
-                                JSONObject containers = response.getJSONObject(i);
-
                                 JSONObject food_container = response.getJSONObject(i);
-
 
                                 int id = food_container.getInt("containerID");
                                 String name = food_container.getString("name");
@@ -127,8 +123,6 @@ public class ContainerActivity extends AppCompatActivity{
                 );
                 // Add JsonArrayRequest to the RequestQueue
                 mQueue.add(jsonArrayRequest);
-
-
             }
         });
     }

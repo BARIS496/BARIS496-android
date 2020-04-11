@@ -24,6 +24,12 @@
             android:icon="@drawable/logo"
             />
         <activity
+            android:name=".HistoryActivity"
+            android:label="Container History"
+            android:theme="@style/EditorTheme"
+            android:icon="@drawable/logo"
+            />
+        <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_search"
             android:icon="@drawable/logo"

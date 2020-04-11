@@ -72,7 +72,7 @@ public class CartActivity extends AppCompatActivity {
                         finish();
                         NetworkResponse response = error.networkResponse;
                         if(response != null && response.data != null){
-                            JSONArray jsonObject = null;
+                            JSONObject jsonObject = null;
                             String errorMessage = null;
 
                             switch(response.statusCode){
@@ -80,8 +80,8 @@ public class CartActivity extends AppCompatActivity {
                                     errorMessage = new String(response.data);
 
                                     try {
-                                        jsonObject = new JSONObject().getJSONArray(errorMessage);
-                                        String serverResponseMessage =  (String)jsonObject.get(Integer.parseInt("hataMesaj"));
+                                        jsonObject = new JSONObject(errorMessage);
+                                        String serverResponseMessage = (String)jsonObject.get("hataMesaj");;
                                         Toast.makeText(getApplicationContext(),""+serverResponseMessage,Toast.LENGTH_LONG).show();
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -92,17 +92,7 @@ public class CartActivity extends AppCompatActivity {
                 }) {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");;
-                        String responseDate = sdf.format(12961212);
-
                         Map<String,String> params = new HashMap<String, String>();
-
-                        /*{"donatesID":1022,"foodType":null,"amountStr":"20","likedStr":null,
-                        "containerId":2564,"donateType":"CREDITCARD","promotionCode":"null",
-                        "creditCardNumberStr":"123","fullName":"tolga","expiration_dateStr":"123",
-                        "cvvNumberStr":"123","recieverName":"null","donateFoodName":" ProPlan Salmon",
-                        "donaterMail":"tolgacarr@gmail.com","discountCode":"0","donateTime":"2020-04-09 16:12:16"
-                         */
 
                         params.put("foodType","aaa");
                         params.put("amountStr","100");

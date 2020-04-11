@@ -5,6 +5,7 @@ public class ProductActivity {
     private String name;
     private double price;
 
+
     public ProductActivity(){}
 
     public ProductActivity(int imageId, String name, double price) {
