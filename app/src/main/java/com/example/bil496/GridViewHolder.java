@@ -28,7 +28,5 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
         textBaslik = itemView.findViewById(R.id.urunOzelligi);
         textFiyat = itemView.findViewById(R.id.fiyat);
         addButton = itemView.findViewById(R.id.button);
-
-
     }
 }

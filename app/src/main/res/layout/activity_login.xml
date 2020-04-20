@@ -1,54 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/foto1">
+    android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/image"
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@+id/overview"
+        android:src="@drawable/logo"
+        android:layout_marginTop="40dp"/>
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:layout_centerInParent="true"
-        android:background="#D3CDCD"
+        android:layout_below="@+id/image"
+        android:fontFamily="sans-serif-light"
         android:hint="email"
-        android:textColor="@color/colorAccent" />
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="12sp"/>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="#D3CDCD"
+        android:layout_height="50dp"
+        android:fontFamily="sans-serif-light"
         android:layout_below="@+id/email"
         android:textColor="@color/colorAccent"
         android:inputType="numberPassword"
-        android:hint="password"/>
+        android:hint="password"
+        android:textSize="12sp"/>
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:id="@+id/login"
         android:text="LOGIN"
         android:layout_below="@+id/password"
         android:textColor="@color/colorAccent"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:textSize="12sp"/>
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/login"
         android:layout_centerHorizontal="true"
         android:text="CREATE USER"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorAccent"
+        android:textSize="12sp"/>
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/button3"
         android:layout_centerHorizontal="true"
         android:text="VIEW USER LIST"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorAccent"
+        android:textSize="12sp"/>
 
 </RelativeLayout>

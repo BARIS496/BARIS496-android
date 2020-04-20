@@ -20,15 +20,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import android.widget.Toast;
+
+
 public class ContainerDetailsActivity extends AppCompatActivity {
 
-    private TextView nameText, addText, weightText, doluText, typeText;
+    private TextView nameText, addText, weightText, doluText, typeText, estimate;
     private RequestQueue mQueue;
     private Button button;
     private Button button2;
+    private Button button3;
     private int id;
     private int cont;
-
+    private ArrayList<String> list = new ArrayList<>();
     @Override
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
@@ -38,8 +43,10 @@ public class ContainerDetailsActivity extends AppCompatActivity {
         weightText = findViewById(R.id.agirlik);
         doluText = findViewById(R.id.dolu);
         typeText = findViewById(R.id.foodType);
+        estimate = findViewById(R.id.estimate);
         button = findViewById(R.id.button);
         button2 = findViewById(R.id.historyButton);
+        button3 = findViewById(R.id.commentButton);
 
         mQueue = Volley.newRequestQueue(this);
 
@@ -66,6 +73,7 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                         String lat = foodcontainer_generator.getString("latitude");
                         String address = foodcontainer_generator.getString("address");
                         double weight = foodcontainer_generator.getDouble("weight");
+                        String estimation = foodcontainer_generator.getString("estimation");
 
                         if(id == Integer.parseInt(deger)){
                             cont = id;
@@ -73,10 +81,11 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                             typeText.append(" Type: " + type + "\n\n");
                             addText.append((" Address:" + address + "\n\n"));
                             weightText.append(" Weight: " + String.valueOf(weight) + "\n\n");
-
-                            //max agirlik 300 gram
-                            double yuzde = (weight * 100) / 300;
+                            list.add(deger);
+                            //max agirlik 5000 gram
+                            double yuzde = (weight * 100) / 5000;
                             doluText.append(" Full Amount: % " + Math.floor(yuzde * 100) / 100);
+                            estimate.append("Estimated End Time:" + estimation);
 
                         }
                     }
@@ -85,7 +94,7 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             // Butona tıklandığında ne yapmasını gerektiğini belirttik
                             Intent gecisYap = new Intent(ContainerDetailsActivity.this, DonationActivity.class);
-                            gecisYap.putExtra("container_id", String.valueOf(id) );
+                            gecisYap.putExtra("container_id", deger);
                             startActivity(gecisYap);
                         }
                     });
@@ -94,8 +103,14 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             // Butona tıklandığında ne yapmasını gerektiğini belirttik
                             Intent gecisYap = new Intent(ContainerDetailsActivity.this, HistoryActivity.class);
-                            gecisYap.putExtra("container_id", String.valueOf(id) );
+                            gecisYap.putExtra("container_id", list.get(0) );
                             startActivity(gecisYap);
+                        }
+                    });
+                    button3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                                Toast.makeText(ContainerDetailsActivity.this, "Comment Adding!", Toast.LENGTH_SHORT).show();
                         }
                     });
 

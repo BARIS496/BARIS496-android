@@ -45,23 +45,21 @@ public class CartActivity extends AppCompatActivity {
         ccv = (EditText)findViewById(R.id.ccvNumber);
         amount = (EditText)findViewById(R.id.amount);
 
-        mQueue = Volley.newRequestQueue(this);
+        final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         executeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StringRequest jsonForPostRequest = new StringRequest(
-                        Request.Method.POST,url,
-                        new Response.Listener<String>() {
+                final StringRequest jsonForPostRequest = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
 
-                                Log.i("log",response.toString());
-
-                                JSONObject jsonObject = null;
+                                Log.d("snow", response.toString());
                                 try {
-                                    jsonObject = new JSONObject(response);
-                                    Toast.makeText(getApplicationContext(),""+jsonObject.getString(String.valueOf(Integer.parseInt("mesaj"))),Toast.LENGTH_LONG).show();
-                                } catch (JSONException e) {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    //Log.d("snowP", "onResponse: " + jsonObject.getString("job"));
+                                    //Log.d("snowP", "onResponse: " + jsonObject.getString("createdAt"));
+                                } catch (Exception e) {
+                                    Log.d("snowP", "hata: " );
                                     e.printStackTrace();
                                 }
                             }
@@ -69,59 +67,40 @@ public class CartActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        finish();
-                        NetworkResponse response = error.networkResponse;
-                        if(response != null && response.data != null){
-                            JSONObject jsonObject = null;
-                            String errorMessage = null;
+                        error.printStackTrace();
 
-                            switch(response.statusCode){
-                                case 400:
-                                    errorMessage = new String(response.data);
-
-                                    try {
-                                        jsonObject = new JSONObject(errorMessage);
-                                        String serverResponseMessage = (String)jsonObject.get("hataMesaj");;
-                                        Toast.makeText(getApplicationContext(),""+serverResponseMessage,Toast.LENGTH_LONG).show();
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                            }
-                        }
                     }
+
                 }) {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String,String> params = new HashMap<String, String>();
 
-                        params.put("foodType","aaa");
-                        params.put("amountStr","100");
-                        params.put("likedStr","2");
-                        params.put("containerId", "0");
-                        params.put("donateType","cat");
+                        params.put("fullName","aaa");
+                        params.put("creditCardNumberStr","100");
+                        params.put("donaterMail","2");
+                        params.put("expiration_dateStr", "0");
+                        params.put("cvvNumberStr","cat");
                         params.put("promotionCode","0");
-                        params.put("creditCardNumberStr","123");
-                        params.put("fullName","SUKO");
-                        params.put("expiration_dateStr","123");
-                        params.put("cvvNumberStr","123");
-                        params.put("recieverName","ali");
-                        params.put("donateFoodName"," ttt");
-                        params.put("donaterMail","gsukransaygili@gmail.com");
-                        params.put("discountCode","0");
-                        params.put("donateTime","2020-04-08 20:53:35");
-
+                        params.put("discountCode","123");
+                        params.put("containerId","0");
+                        System.out.println(params);
                         return params;
                     }
 
                     @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> param = new HashMap<String, String>();
-                        param.put("Content-Type", "application/json; charset=utf-8");
-                        return param;
+                    public String getBodyContentType() {
+                        return "application/json; charset:utf-8";
                     }
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("Content-Type","application/json; charset:utf-8");
+                        return params;
+                    }
+
                 };
-                jsonForPostRequest.setRetryPolicy(new DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-                mQueue.add(jsonForPostRequest);
+                queue.add(jsonForPostRequest);
             }
         });
     }

@@ -55,7 +55,7 @@
                 android:layout_below="@+id/foodType"
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-light"
-                android:hint="Food Type"
+                android:hint="Amount"
                 android:inputType="textPersonName|textCapWords"
                 android:textSize="12sp" />
 

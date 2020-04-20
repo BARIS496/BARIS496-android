@@ -54,12 +54,20 @@
             android:layout_below="@+id/name"
             android:layout_marginTop="10dp"/>
         <TextView
-            android:id="@+id/agirlik"
+            android:id="@+id/foodType"
             android:fontFamily="sans-serif-light"
             android:inputType="textPersonName|textCapWords"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/address"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/agirlik"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textPersonName|textCapWords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/foodType"
             android:layout_marginTop="10dp"/>
         <TextView
             android:id="@+id/dolu"
@@ -70,24 +78,44 @@
             android:layout_below="@+id/agirlik"
             android:layout_marginTop="10dp"/>
         <TextView
-            android:id="@+id/foodType"
+            android:id="@+id/estimate"
             android:fontFamily="sans-serif-light"
             android:inputType="textPersonName|textCapWords"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dolu"
             android:layout_marginTop="10dp"/>
-
+        <EditText
+            android:id="@+id/comment"
+            android:hint="Add comment here"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textPersonName|textCapWords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/estimate"
+            android:layout_marginTop="10dp"/>
+        <Button
+            android:id="@+id/commentButton"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/comment"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@color/colorAccent"
+            android:text="Post"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-light" />
         <Button
             android:id="@+id/button"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:layout_below="@+id/foodType"
+            android:layout_below="@+id/commentButton"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
             android:background="@color/colorAccent"
             android:text="Cart"
+            android:layout_marginTop="10dp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-light"
             app:srcCompat="@drawable/logo" />

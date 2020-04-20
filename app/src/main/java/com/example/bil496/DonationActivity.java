@@ -27,6 +27,7 @@ public class DonationActivity extends AppCompatActivity {
 
         recyclerViewKategori.setLayoutManager(layoutManager);
 
+
         food_list = new ArrayList<>();
         food_list.add(new ProductActivity(R.drawable.kopek_mama3,"by Simply Perfection\n" +
                 "Super Premium Chicken and Brown Rice Recipe Dog Kibble\n" +

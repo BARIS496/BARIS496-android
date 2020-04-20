@@ -1,46 +1,50 @@
 package com.example.bil496;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.app.Activity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class HistoryActivity extends AppCompatActivity {
-    private TextView fullName, foodName, mail, time;
-    private RequestQueue mQueue;
-    private int id;
-    private int cont;
+import java.util.ArrayList;
+import java.util.Queue;
 
+
+public class HistoryActivity extends Activity {
+
+    private ArrayList<String> list = new ArrayList<>();
+    private String url = "https://restservices496.herokuapp.com/donates";
+    private RequestQueue mQueue;
+    private ArrayAdapter<String> veriAdaptoru;
     @Override
-    public void onCreate(Bundle bundle){
-        super.onCreate(bundle);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        fullName = findViewById(R.id.sat1sut1);
-        foodName = findViewById(R.id.sat1sut2);
-        mail = findViewById(R.id.sat1sut3);
-        time = findViewById(R.id.sat1sut4);
+
+        ListView listemiz=(ListView) findViewById(R.id.listView1);
+        Bundle gelenVeri = getIntent().getExtras();
+        final String deger = gelenVeri.getString("container_id");
+        System.out.println(deger);
+
+        //(B) adımı
+        veriAdaptoru=new ArrayAdapter<String>
+                (this, android.R.layout.simple_list_item_1, android.R.id.text1, list);
+
+        //(C) adımı
+        listemiz.setAdapter(veriAdaptoru);
 
         mQueue = Volley.newRequestQueue(this);
-
-        Bundle gelenVeri = getIntent().getExtras();
-        final String deger = gelenVeri.getString("id");
-
-        String url = "https://restservices496.herokuapp.com/donates";
-
         // Initialize a new JsonArrayRequest instance
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -50,21 +54,26 @@ public class HistoryActivity extends AppCompatActivity {
                     // Loop through the array elements
                     for(int i=0;i<response.length();i++){
                         // Get current json object
-                        JSONObject donateTable_generator = response.getJSONObject(i);
+                        JSONObject foodcontainer_generator = response.getJSONObject(i);
 
-                        int id2 = donateTable_generator.getInt("donatesID");
-                        id = donateTable_generator.getInt("containerID");
-                        String name = donateTable_generator.getString("fullName");
-                        String food = donateTable_generator.getString("donateFoodName");
-                        String mailAdd = donateTable_generator.getString("donaterMail");
-                        String timeDate = donateTable_generator.getString("donateTime");
+                        int id = foodcontainer_generator.getInt("donatesID");
+                        String type = foodcontainer_generator.getString("foodType");
+                        String amount = foodcontainer_generator.getString("amountStr");
+                        String liked = foodcontainer_generator.getString("likedStr");
+                        int container = foodcontainer_generator.getInt("containerId");
+                        String fullName = foodcontainer_generator.getString("fullName");
 
-                        if(id == Integer.parseInt(deger)){
-                            cont = id;
-                            fullName.append(name + "\n\n");
-                            foodName.append(food + "\n\n");
-                            mail.append((mailAdd + "\n\n"));
-                            time.append(timeDate + "\n\n");
+                        if(container == Integer.parseInt(deger) && amount != null){
+                            if(liked == null){
+                                veriAdaptoru.add(fullName + "                " + amount + " kg" +
+                                        "     " + "0");
+                                veriAdaptoru.notifyDataSetChanged();
+                            }
+                            else{
+                                veriAdaptoru.add(fullName + "                " + amount + " kg" +
+                                        "     " + liked);
+                                veriAdaptoru.notifyDataSetChanged();
+                            }
                         }
                     }
 
@@ -84,12 +93,6 @@ public class HistoryActivity extends AppCompatActivity {
         // Add JsonArrayRequest to the RequestQueue
         mQueue.add(jsonArrayRequest);
 
-    }
-    public int getCont(){
-        return cont;
-    }
-    public void setCont(int id) {
-        this.cont = id;
     }
 }
 
