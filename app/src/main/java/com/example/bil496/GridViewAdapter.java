@@ -56,6 +56,7 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewHolder> {
                 Intent gecisYap = new Intent(context, CartActivity.class);
                 gecisYap.putExtra("kategori_id",kategoriler.get(position).getImageId());
                 gecisYap.putExtra("container_id",String.valueOf(sayi));
+                System.out.println(sayi);
                 context.startActivity(gecisYap);
             }
         });

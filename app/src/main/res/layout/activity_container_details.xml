@@ -20,7 +20,7 @@
             android:layout_height="140dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/kugulu" />
+            android:src="@drawable/segmenler" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"

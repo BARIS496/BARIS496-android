@@ -1,40 +1,42 @@
 package com.example.bil496;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import java.net.HttpURLConnection;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.android.volley.toolbox.HttpHeaderParser;
-import org.json.JSONObject;
-import org.json.JSONArray;
 import org.json.JSONException;
-import java.text.SimpleDateFormat;
+import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.BufferedReader;
+import java.util.concurrent.ExecutionException;
+import android.widget.EditText;
+
 public class CartActivity extends AppCompatActivity {
 
     private Button executeBtn;
-    private EditText foodName, foodType, fullName, cardNumber, exDate, ccv, amount;
+    private EditText foodName, foodType, fullName, cardNumber, exDate, ccv, amount, email, promotion;
     private String url = "https://restservices496.herokuapp.com/addDonate";
-    private RequestQueue mQueue;
+    String deger;
 
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_cart);
+
+        Bundle gelenVeri = getIntent().getExtras();
+        deger = gelenVeri.getString("container_id");
 
         executeBtn = (Button)findViewById(R.id.button);
         foodName = (EditText)findViewById(R.id.foodName);
@@ -44,65 +46,86 @@ public class CartActivity extends AppCompatActivity {
         exDate = (EditText)findViewById(R.id.expDate);
         ccv = (EditText)findViewById(R.id.ccvNumber);
         amount = (EditText)findViewById(R.id.amount);
+        email = (EditText) findViewById(R.id.email);
+        promotion = (EditText) findViewById(R.id.promotion);
 
-        final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         executeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final StringRequest jsonForPostRequest = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
+                SendPost async = new SendPost();
+                try {
+                    async.execute().get();
+                } catch (ExecutionException e) {
 
-                                Log.d("snow", response.toString());
-                                try {
-                                    JSONObject jsonObject = new JSONObject(response);
-                                    //Log.d("snowP", "onResponse: " + jsonObject.getString("job"));
-                                    //Log.d("snowP", "onResponse: " + jsonObject.getString("createdAt"));
-                                } catch (Exception e) {
-                                    Log.d("snowP", "hata: " );
-                                    e.printStackTrace();
-                                }
-                            }
-                        }, new Response.ErrorListener() {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-
-                    }
-
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String,String> params = new HashMap<String, String>();
-
-                        params.put("fullName","aaa");
-                        params.put("creditCardNumberStr","100");
-                        params.put("donaterMail","2");
-                        params.put("expiration_dateStr", "0");
-                        params.put("cvvNumberStr","cat");
-                        params.put("promotionCode","0");
-                        params.put("discountCode","123");
-                        params.put("containerId","0");
-                        System.out.println(params);
-                        return params;
-                    }
-
-                    @Override
-                    public String getBodyContentType() {
-                        return "application/json; charset:utf-8";
-                    }
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String,String> params = new HashMap<String, String>();
-                        params.put("Content-Type","application/json; charset:utf-8");
-                        return params;
-                    }
-
-                };
-                queue.add(jsonForPostRequest);
+                    e.printStackTrace();
+                }
             }
+
         });
     }
+    class SendPost extends AsyncTask<String, Void, String> {
 
+        @Override
+        protected String doInBackground(String... strings) {
+            HttpURLConnection connection;
+            OutputStreamWriter request = null;
+            URL url = null;
+            String response = null;
+            JSONObject jsonEmailData = new JSONObject();
+
+
+            try {
+                jsonEmailData.put("foodType", foodType.getText().toString());
+                jsonEmailData.put("amountStr", amount.getText().toString());
+                jsonEmailData.put("fullName", fullName.getText().toString());
+                jsonEmailData.put("creditCardNumberStr", cardNumber.getText().toString());
+                jsonEmailData.put("donaterMail", email.getText().toString());
+                jsonEmailData.put("expiration_dateStr", exDate.getText().toString());
+                jsonEmailData.put("cvvNumberStr",ccv.getText().toString());
+                jsonEmailData.put("discountCode",promotion.getText().toString());
+                jsonEmailData.put("containerId",deger);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                url = new URL("https://restservices496.herokuapp.com/addDonate");
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestMethod("POST");
+                request = new OutputStreamWriter(connection.getOutputStream());
+                request.write(String.valueOf(jsonEmailData));
+                request.flush();
+                request.close();
+                String line = "";
+                InputStreamReader isr = new InputStreamReader(connection.getInputStream());
+                BufferedReader reader = new BufferedReader(isr);
+                StringBuilder sb = new StringBuilder();
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                    //System.out.println(sb.toString());
+                }
+                //Response from server after recovery process will be stored in response variable.
+                response = sb.toString().trim();
+                JSONObject jObj = new JSONObject(response);
+                final String status = jObj.getString("status");
+                final String message = jObj.getString("message");
+                Log.i("status:", status);
+                Log.i("message:", message);
+                isr.close();
+                reader.close();
+                return status;
+
+            } catch (Exception e) {
+                // Error
+                e.printStackTrace();
+                return "Fail sending";
+            }
+        }
+    }
 }

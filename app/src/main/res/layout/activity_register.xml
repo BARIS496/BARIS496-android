@@ -1,68 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".RegistrationActivity">
+    tools:context=".CartActivity">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register new account" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_marginTop="20dp">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/overview"
+            android:src="@drawable/logo"/>
+        <TextView
+            android:text="Be A Volunteer"
+            android:id="@+id/overview"
+            android:layout_marginLeft="3dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/colorAccent"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/first_name"
+            android:id="@+id/foodName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="First Name" />
-        <EditText
-            android:id="@+id/last_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Last Name" />
-        <EditText
-            android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPostalAddress"
-            android:text="Address" />
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:text="Email" />
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Username" />
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:text="Password" />
+            android:layout_below="@+id/overview"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-light"
+            android:hint="First Name"
+            android:inputType="textPersonName|textCapWords"
+            android:textSize="12sp" />
 
-    </ScrollView>
+        <EditText
+            android:id="@+id/foodType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/foodName"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-light"
+            android:hint="Last Name"
+            android:inputType="textPersonName|textCapWords"
+            android:textSize="12sp" />
+        <EditText
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/foodType"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-light"
+            android:hint="Address"
+            android:inputType="textPersonName|textCapWords"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/fullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/amount"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-light"
+            android:hint="Email"
+            android:inputType="textPersonName|textCapWords"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/cardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fullName"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-light"
+            android:hint="Social Media"
+            android:inputType="textPersonName|textCapWords"
+            android:textSize="12sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/login"
+            android:text="Send"
+            android:layout_below="@+id/cardNumber"
+            android:textColor="@color/colorAccent"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-light"
+            android:textSize="12sp"/>
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
 
 
-</LinearLayout>

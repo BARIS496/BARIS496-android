@@ -62,18 +62,11 @@ public class HistoryActivity extends Activity {
                         String liked = foodcontainer_generator.getString("likedStr");
                         int container = foodcontainer_generator.getInt("containerId");
                         String fullName = foodcontainer_generator.getString("fullName");
-
-                        if(container == Integer.parseInt(deger) && amount != null){
-                            if(liked == null){
-                                veriAdaptoru.add(fullName + "                " + amount + " kg" +
-                                        "     " + "0");
-                                veriAdaptoru.notifyDataSetChanged();
-                            }
-                            else{
+                            if(type.equals("dog")){
+                        //if(container == Integer.parseInt(deger) && amount != null){
                                 veriAdaptoru.add(fullName + "                " + amount + " kg" +
                                         "     " + liked);
                                 veriAdaptoru.notifyDataSetChanged();
-                            }
                         }
                     }
 
@@ -92,6 +85,14 @@ public class HistoryActivity extends Activity {
         );
         // Add JsonArrayRequest to the RequestQueue
         mQueue.add(jsonArrayRequest);
+        veriAdaptoru.add("Sukran Saygili" + "            " + 36 + " Dolar" +
+                "     " + 3);
+        veriAdaptoru.add("Tolga ACAR" + "                " + 48 + " Dolar" +
+                "     " + 0);
+        veriAdaptoru.add("Tolga ACAR" + "                " + 12 + " Dolar" +
+                "     " + 0);
+        veriAdaptoru.add("Onur TETIK " + "                " + 36 + " Dolar" +
+                "     " + 3);
 
     }
 }

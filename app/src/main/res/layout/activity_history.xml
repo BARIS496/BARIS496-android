@@ -39,7 +39,7 @@
         android:textStyle="bold"
         android:fontFamily="sans-serif-light"
         android:textColor="@color/colorAccent"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_toRightOf="@+id/amount" />
     <ListView
         android:id="@+id/listView1"

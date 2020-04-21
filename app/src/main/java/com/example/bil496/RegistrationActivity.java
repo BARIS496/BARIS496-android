@@ -1,86 +1,130 @@
 package com.example.bil496;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.EditText;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import java.net.HttpURLConnection;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+import android.widget.EditText;
 import android.widget.Toast;
-
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
+import org.json.JSONException;
 import org.json.JSONObject;
-import com.android.volley.toolbox.StringRequest;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.io.BufferedReader;
+import java.util.concurrent.ExecutionException;
 
 
-public class RegistrationActivity extends AppCompatActivity {
+public class RegistrationActivity extends Activity {
+    Button buton;
+    EditText name, lastName, address, email, pass;
+    ProgressDialog pDialog;
+    public URL url;
 
-    private EditText firstName, lastName, address, email, username, password;
-    private String firstName2, lastName2, address2, email2, username2, password2;
-    private RequestQueue mQueue;
-    private String url;
+    HttpURLConnection connection;
 
     @Override
-    protected void onCreate(Bundle bundle){
-        super.onCreate(bundle);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        firstName = findViewById(R.id.first_name);
-        firstName2 = String.valueOf(firstName);
-        lastName = findViewById(R.id.last_name);
-        lastName2 =String.valueOf(lastName);
-        address = findViewById(R.id.address);
-        address2 = String.valueOf(address);
-        email = findViewById(R.id.email);
-        email2 = String.valueOf(email);
-        username = findViewById(R.id.username);
-        username2 = String.valueOf(username);
-        password = findViewById(R.id.password);
-        password2 = String.valueOf(password);
+        name = (EditText) findViewById(R.id.foodName);
+        lastName = (EditText) findViewById(R.id.foodType);
+        address = (EditText) findViewById(R.id.amount);
+        email = (EditText) findViewById(R.id.fullName);
+        pass = (EditText) findViewById(R.id.cardNumber);
 
+        buton = (Button) findViewById(R.id.login);
+        buton.setOnClickListener(new View.OnClickListener() {
+            //buton a click listener ekledik
 
-        mQueue = Volley.newRequestQueue(this);
-        jsonPost(firstName2,lastName2,address2,email2,username2,password2);
+            public void onClick(View v) {
+                SendPost async = new SendPost();
+                try {
+                    async.execute().get();
+                    finish();
+                } catch (ExecutionException e) {
+
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+
+                    e.printStackTrace();
+                }
+
+            }
+        });
 
     }
 
-    private void jsonPost(final String firstName, final String lastName, final String address, final String email, final String password, String response){
-        url = "http://restservices496.herokuapp.com/addMember";
+    class SendPost extends AsyncTask<String, Void, String> {
 
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String string) {
-                // response
-                Log.d("Response", string);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(getApplicationContext(), "Veriler Okunurken Hata Oluştu", Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> member = new HashMap<>();
-                member.put("first_name", firstName);
-                member.put("last_name", lastName);
-                member.put("address", address);
-                member.put("email",email);
-                member.put("username", String.valueOf(username));
-                member.put("password",password);
-                return member;
-            }
-        };
+        @Override
+        protected String doInBackground(String... strings) {
+            HttpURLConnection connection;
+            OutputStreamWriter request = null;
+            URL url = null;
+            String response = null;
+            JSONObject jsonEmailData = new JSONObject();
 
-        mQueue.add(request);
+            //{"first_name":"dnm1","last_name":"dnm2","address":"dnm3","email":"dnm4@gmail.com","pass":"dnm5"}
+            try {
+                jsonEmailData.put("first_name", name.getText().toString());
+                jsonEmailData.put("last_name", lastName.getText().toString());
+                jsonEmailData.put("address", address.getText().toString());
+                jsonEmailData.put("email", email.getText().toString());
+                jsonEmailData.put("pass", pass.getText().toString());
 
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                url = new URL("http://restservices496.herokuapp.com/addMember");
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestMethod("POST");
+                request = new OutputStreamWriter(connection.getOutputStream());
+                request.write(String.valueOf(jsonEmailData));
+                request.flush();
+                request.close();
+                String line = "";
+                InputStreamReader isr = new InputStreamReader(connection.getInputStream());
+                BufferedReader reader = new BufferedReader(isr);
+                StringBuilder sb = new StringBuilder();
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                    System.out.println(sb.toString());
+                }
+                //Response from server after recovery process will be stored in response variable.
+                response = sb.toString().trim();
+                JSONObject jObj = new JSONObject(response);
+                final String status = jObj.getString("status");
+                final String message = jObj.getString("message");
+                Log.i("status:", status);
+                Log.i("message:", message);
+                isr.close();
+                reader.close();
+                return status;
+
+            } catch (Exception e) {
+                // Error
+                e.printStackTrace();
+                return "Fail sending";
+            }
+        }
     }
 }
+

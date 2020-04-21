@@ -111,12 +111,22 @@
                 android:layout_marginTop="10dp"
                 android:hint="Promotion Code here"
                 android:textSize="12sp" />
+            <EditText
+                android:id="@+id/email"
+                android:fontFamily="sans-serif-light"
+                android:inputType="textPersonName|textCapWords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/promotion"
+                android:layout_marginTop="10dp"
+                android:hint="Email here"
+                android:textSize="12sp" />
             <Button
                 android:id="@+id/button"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
-                android:layout_below="@+id/promotion"
+                android:layout_below="@+id/email"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorAccent"
