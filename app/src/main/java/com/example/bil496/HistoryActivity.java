@@ -18,31 +18,29 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 
 public class HistoryActivity extends Activity {
 
+    final List<History> users = new ArrayList<History>();
+
     private ArrayList<String> list = new ArrayList<>();
     private String url = "https://restservices496.herokuapp.com/donates";
     private RequestQueue mQueue;
-    private ArrayAdapter<String> veriAdaptoru;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        ListView listemiz=(ListView) findViewById(R.id.listView1);
+        final ListView listView = (ListView) findViewById(R.id.listView);
+        final HistoryAdapter adapter = new HistoryAdapter(this, users);
+
         Bundle gelenVeri = getIntent().getExtras();
         final String deger = gelenVeri.getString("container_id");
-        System.out.println(deger);
+        //final String deger = "2717";
 
-        //(B) adımı
-        veriAdaptoru=new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, android.R.id.text1, list);
-
-        //(C) adımı
-        listemiz.setAdapter(veriAdaptoru);
 
         mQueue = Volley.newRequestQueue(this);
         // Initialize a new JsonArrayRequest instance
@@ -62,12 +60,12 @@ public class HistoryActivity extends Activity {
                         String liked = foodcontainer_generator.getString("likedStr");
                         int container = foodcontainer_generator.getInt("containerId");
                         String fullName = foodcontainer_generator.getString("fullName");
-                            if(type.equals("dog")){
-                        //if(container == Integer.parseInt(deger) && amount != null){
-                                veriAdaptoru.add(fullName + "                " + amount + " kg" +
-                                        "     " + liked);
-                                veriAdaptoru.notifyDataSetChanged();
-                        }
+
+                        //if(container == Integer.parseInt(deger)){
+                            users.add(new History(0,fullName,amount));
+                            listView.setAdapter(adapter);
+
+                        //}
                     }
 
                 }catch (JSONException e){
@@ -85,14 +83,6 @@ public class HistoryActivity extends Activity {
         );
         // Add JsonArrayRequest to the RequestQueue
         mQueue.add(jsonArrayRequest);
-        veriAdaptoru.add("Sukran Saygili" + "            " + 36 + " Dolar" +
-                "     " + 3);
-        veriAdaptoru.add("Tolga ACAR" + "                " + 48 + " Dolar" +
-                "     " + 0);
-        veriAdaptoru.add("Tolga ACAR" + "                " + 12 + " Dolar" +
-                "     " + 0);
-        veriAdaptoru.add("Onur TETIK " + "                " + 36 + " Dolar" +
-                "     " + 3);
 
     }
 }

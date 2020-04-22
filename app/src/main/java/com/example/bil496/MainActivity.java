@@ -54,15 +54,13 @@ public class MainActivity extends AppCompatActivity {
                         // Get current json object
                         JSONObject member_generator = response.getJSONObject(i);
 
-                        int id = member_generator.getInt("memberID");
                         String firstName = member_generator.getString("first_name");
                         String lastName = member_generator.getString("last_name");
                         String address = member_generator.getString("address");
                         String email = member_generator.getString("email");
                         String username = member_generator.getString("username");
-                        String pass = member_generator.getString("pass");
 
-                        mTextViewResult.append(String.valueOf(id) + ", " + firstName + ", "
+                        mTextViewResult.append(firstName + ", "
                                 + lastName + ", " + email + ", " + username +
                                 "\n\n");
                     }

@@ -121,6 +121,7 @@
                 android:layout_marginTop="10dp"
                 android:hint="Email here"
                 android:textSize="12sp" />
+
             <Button
                 android:id="@+id/button"
                 style="@style/Widget.AppCompat.Button"
@@ -130,9 +131,10 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorAccent"
+                android:fontFamily="sans-serif-light"
+                android:shadowRadius="?attr/dialogCornerRadius"
                 android:text="Donate"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif-light"
                 app:srcCompat="@drawable/logo" />
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

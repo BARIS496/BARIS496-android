@@ -32,7 +32,12 @@ public class History {
         this.name = name;
     }
 
-    public History(String amount, int like, String name) {
+    public History(int like, String amount, String name) {
+        this.amount = amount;
+        this.like = like;
+        this.name = name;
+    }
+    public History(String name, String amount, int like) {
         this.amount = amount;
         this.like = like;
         this.name = name;

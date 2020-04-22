@@ -13,7 +13,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -52,6 +51,7 @@ public class ContainerDetailsActivity extends AppCompatActivity {
 
         Bundle gelenVeri = getIntent().getExtras();
         final String deger = gelenVeri.getString("id");
+        cont = Integer.parseInt(deger);
 
         String url = "http://restservices496.herokuapp.com/containers";
 
@@ -110,6 +110,7 @@ public class ContainerDetailsActivity extends AppCompatActivity {
                     button3.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            
                                 Toast.makeText(ContainerDetailsActivity.this, "Comment Adding!", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -134,9 +135,6 @@ public class ContainerDetailsActivity extends AppCompatActivity {
     }
     public int getCont(){
         return cont;
-    }
-    public void setCont(int id) {
-        this.cont = id;
     }
 
 

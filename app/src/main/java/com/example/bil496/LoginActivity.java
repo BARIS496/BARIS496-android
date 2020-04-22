@@ -25,9 +25,6 @@ public class LoginActivity extends AppCompatActivity {
         view = findViewById(R.id.button2);
         create = findViewById(R.id.button3);
 
-        /*if(pass.toString() == null || mail.toString() == null)
-            Toast.makeText(getApplicationContext(), "Mail and password field cannot be empty", Toast.LENGTH_LONG).show();*/
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

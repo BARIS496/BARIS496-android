@@ -55,6 +55,8 @@ public class CartActivity extends AppCompatActivity {
                 SendPost async = new SendPost();
                 try {
                     async.execute().get();
+                    Toast.makeText(CartActivity.this, "Donated!", Toast.LENGTH_SHORT).show();
+                    finish();
                 } catch (ExecutionException e) {
 
                     e.printStackTrace();

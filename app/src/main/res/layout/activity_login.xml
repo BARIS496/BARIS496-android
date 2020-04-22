@@ -34,6 +34,7 @@
         android:textColor="@color/colorAccent"
         android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif-light"
+        android:shadowRadius="?attr/dialogCornerRadius"
         android:textSize="12sp"/>
 
     <Button
@@ -44,6 +45,7 @@
         android:layout_centerHorizontal="true"
         android:text="Be A Volunteer"
         android:textColor="@color/colorAccent"
+        android:shadowRadius="?attr/dialogCornerRadius"
         android:fontFamily="sans-serif-light"
         android:textSize="12sp"/>
 
@@ -55,6 +57,7 @@
         android:layout_centerHorizontal="true"
         android:text="View Volunteer List"
         android:textColor="@color/colorAccent"
+        android:shadowRadius="?attr/dialogCornerRadius"
         android:fontFamily="sans-serif-light"
         android:textSize="12sp"/>
 

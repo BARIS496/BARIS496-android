@@ -90,6 +90,7 @@
             android:textColor="@color/colorAccent"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif-light"
+            android:shadowRadius="?attr/dialogCornerRadius"
             android:textSize="12sp"/>
     </RelativeLayout>
 </androidx.core.widget.NestedScrollView>
